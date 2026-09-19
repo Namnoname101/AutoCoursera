@@ -1,0 +1,65 @@
+# CustomerManager — bài Peer-graded nộp PDF
+
+Bản cập nhật dành cho `D:\Acose\CustomerManager\Acose.CustomerManager.exe`.
+
+Khi chạy khóa, bộ auto mở **My submission**, tìm PDF soạn sẵn theo đúng khóa và tên bài, bấm **Add File** và nộp khi biểu mẫu sẵn sàng. Bài đã nộp sẽ bỏ qua upload và chuyển sang **Review Your Peers**. Theo cấu hình người dùng yêu cầu, mỗi tiêu chí chọn mức điểm số cao nhất hiển thị rõ ràng; nhận xét trống dùng `Thank you for sharing your work.`, nhận xét có sẵn được giữ nguyên.
+
+Bộ đếm `Reviews — 4 left to complete` (hoặc số còn lại thực tế) quyết định số review cần làm. Sau mỗi lần gửi, chờ xác nhận và bộ đếm giảm; về 0 thì ngừng, không làm thêm bài tùy chọn. Không suy ra đạt chỉ vì đã bấm Submit. Thiếu bài để review, thiếu bộ đếm, điểm mơ hồ hoặc chưa thấy xác nhận thì dừng và giữ tiến độ đã gửi. Không tự đánh dấu xác nhận danh tính/honor code trong biểu mẫu review. Review hoàn tất vẫn phải kiểm tra My submission: nếu điểm chưa có, Manager báo chờ kết quả thay vì hoàn thành 100%.
+
+Bản sửa hộp upload: nếu **Add File** mở hộp **Upload File**, bộ auto xử lý **browse files** hoặc input ẩn trong hộp, bấm **Upload 1 file** khi cần, chờ upload hoàn tất rồi mới nộp. Tiêu đề/tên dự án trống được tự điền bằng tên bài hoặc `okkkook`; giữ nguyên nội dung đã nhập và không thay đổi tên tài khoản.
+
+## Đặt PDF ở đâu?
+
+Thư mục chính là `D:\Acose\CustomerManager\PreparedPdfs`. Tạo một thư mục con theo slug khóa học (phần sau `/learn/` trong link), rồi đặt tên PDF theo tên bài hoặc slug bài:
+
+```text
+PreparedPdfs\
+  uva-darden-experiencing-design\
+    Personal Development Plan (PDP).pdf
+```
+
+Ví dụ trên dùng cho bài `/learn/uva-darden-experiencing-design/peer/KZ69l/personal-development-plan-pdp`. Tên `personal-development-plan-pdp.pdf` hoặc `Graded Assignment Personal Development Plan (PDP).pdf` cũng phù hợp.
+
+Bộ auto chỉ tìm trong thư mục của đúng khóa tại các nơi sau:
+
+1. Thư mục đặt trong biến môi trường `ACOSE_PREPARED_PDF_ROOT`, nếu có.
+2. `D:\Acose\CustomerManager\PreparedPdfs`.
+3. `D:\Acose\CustomerManager\Engine\PreparedPdfs`.
+4. `C:\Users\dai99\Downloads\Acoursera PDFs` (thư mục Downloads của tài khoản Windows đang chạy).
+
+Mỗi nơi đều phải có thư mục con theo khóa. PDF đang nằm trong `Downloads\Acoursera PDFs\<slug-khóa>` tiếp tục dùng được. Nếu không tìm thấy PDF, tên không khớp hoặc có nhiều file cùng khớp (kể cả ở nhiều nơi trên), khóa dừng và hiện lý do để bạn bổ sung/chọn lại file rồi chạy lại. Chỉ giữ một PDF khớp mỗi bài trong các thư mục kho. Nội dung PDF do bạn chuẩn bị sẵn.
+
+## Cài bản cập nhật
+
+Đóng CustomerManager và các cửa sổ khóa/kiểm tra của nó. Sau khi Release build và các kiểm tra đã đạt, chạy `deploy.ps1 -VerificationSummary "<kết quả kiểm tra thực tế>"` trong thư mục bản cập nhật. Script từ chối cập nhật khi công cụ còn chạy hoặc bộ auto đã khác phiên bản nền được kiểm tra.
+
+Script chỉ thay DLL/PDB của bộ auto, cập nhật manifest, tạo `PreparedPdfs` nếu chưa có và lưu nguồn/kiểm tra tại `Updates\peer-review-...`. `Before` chứa DLL/PDB và manifest trước cập nhật; nếu thay file thất bại, script khôi phục chúng. Dữ liệu đơn, tiến độ, profile đăng nhập và cấu hình mã hóa không bị sửa; các PDF hiện có không bị di chuyển hay ghi đè. Thông tin cập nhật đăng ký khóa (`EnrollmentUpdate`) được giữ lại. Bản Manager có nút Ẩn/Hiện không bị thay đổi.
+
+Mở lại CustomerManager để chạy bản mới. Không cần đổi đường dẫn Engine hoặc thiết lập lại tài khoản.
+
+## Kiểm tra bản cập nhật
+
+- Release `net10.0-windows/win-x64`: build thành công, 0 lỗi.
+- `Checks`: 125 kiểm tra PDF, hộp Upload File/browse files, title, upload CDP qua Chromium, xác nhận nộp và không nộp trùng; bao gồm file input và folder input Uppy cùng tồn tại, không upload vào route review-next.
+- `ScannerChecks`: 44 kiểm tra scanner, Resume/Results pending, module xanh, bài đã xác nhận đạt và chuyển sang Review tự động, nhận diện đúng review-next.
+- `ReviewChecks`: 164 kiểm tra bộ đếm Reviews / left to complete, chọn điểm cao nhất, nhận xét, gửi một lần, dialog thật/rỗng/ẩn và luồng 4 → 0 trên cùng route review-next với các bài khác nhau.
+- `EnrollmentChecks`: 27 kiểm tra luồng đăng ký, giữ nguyên bản sửa FPT/organization và chặn free trial/paid.
+- Các kiểm tra trình duyệt chạy trên trang mô phỏng cục bộ; chưa nộp thật trên tài khoản khách.
+- Lần xác minh cuối chạy với Chrome (`ACOSE_TEST_BROWSER=chrome`); Edge đã chạy bộ PDF đạt trước đó nhưng lần khởi động lại trình duyệt test gặp `TargetClosedException` trước khi mở trang. Cấu hình test có thể chọn Edge hoặc Chrome, không thay đổi WebView2 của Worker.
+- Build còn cảnh báo đã có trong phiên bản nền (nullable/biến không dùng và gói SQLitePCLRaw.lib.e_sqlite3 2.1.10). Bản này không nâng cấp các dependency.
+
+Mã xử lý mới: `MainWindow.PeerPdf.cs`, `Services/PeerPdfProbe.js`, `Services/PreparedPdfLibrary.cs`. Hàm `HandlePdfFormSubmissionAsync` gọi vào `HandlePreparedPeerPdfAsync`.
+
+## Sửa dừng trước khi chọn PDF (2026-09-16)
+
+Đã kiểm tra trực tiếp DOM bài Insights and Design Criteria ở chế độ Mở kiểm tra, không chọn/upload hoặc nộp file. Uppy tạo hai input ẩn có cùng class `uppy-Dashboard-input`, trong đó một input có `webkitdirectory` dùng để chọn thư mục. Bộ chọn cũ đếm cả hai và báo `AMBIGUOUS_UPLOAD`. Bộ chọn mới loại input chọn thư mục, chỉ gắn PDF vào input chọn file; hai input chọn file thật vẫn bị chặn để tránh chọn nhầm.
+
+Khi bài bị tạm dừng, Manager vẫn dùng cơ chế đóng Worker để nhả profile. Thông báo dừng PDF hiện giữ lại lỗi/trạng thái cụ thể cùng hướng dẫn, thay vì chỉ còn câu “Kiểm tra My submission rồi chạy lại khóa”. Không coi lỗi upload hoặc trạng thái chờ chấm là đã hoàn thành.
+
+## Sửa BLOCKING_DIALOG và review-next (2026-09-16)
+
+Đã đối chiếu DOM trên WebView2 ở chế độ kiểm tra: Coursera có một `div[role=dialog]` rỗng, class `bai-StyleReset`, rộng 1244 nhưng cao 0. Code cũ chỉ kiểm tra có rectangle nên chặn nhầm. Bản mới yêu cầu diện tích thực sự hiển thị; vẫn chặn popup thật hoặc nội dung con hiển thị tràn ra khỏi wrapper. Popup chuyển tiếp được chờ tối đa 6 giây trước khi báo cần xử lý.
+
+Trang sau Start Reviewing dùng `/review-next`, không có thẻ `main/form`. Bộ nhận diện hỗ trợ route này, dùng khung `.rc-PeerItemPage` / `.rc-SubmittedSubmissionView`, không điền textarea bên ngoài. Định danh bài dựa trên artifact đã băm, không dựa riêng vào URL review-next/rubric chung; bỏ query chữ ký tạm thời để không gửi lại cùng bài khi URL tải file được gia hạn. Không nhận diện được bài thì dừng trước khi điền/gửi.
+
+Probe chỉ đọc trên trang thật trả về `FORM_READY`, `Remaining=4`, `GroupCount=2`, có định danh bài. Chưa chọn điểm, nhập nhận xét hoặc gửi review thật trong lần kiểm tra này. 360 kiểm tra mô phỏng (125 PDF + 44 scanner + 164 review + 27 enrollment) đạt; Release build 0 lỗi, 17 cảnh báo sẵn có.

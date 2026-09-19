@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Acose.CustomerManager/1.0.0": {
+        "runtime": {
+          "Acose.CustomerManager.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Acose.CustomerManager/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

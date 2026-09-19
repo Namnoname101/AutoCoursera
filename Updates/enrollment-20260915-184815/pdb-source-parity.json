@@ -1,0 +1,155 @@
+[
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\App.xaml.cs",
+    "algorithm": "SHA256",
+    "expected": "3D7C486E1B1B98801AA595D085A73F10B23ADF091BC5821C35C3EB9808932232",
+    "exists": true,
+    "actual": "3D7C486E1B1B98801AA595D085A73F10B23ADF091BC5821C35C3EB9808932232",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\MainWindow.xaml.cs",
+    "algorithm": "SHA256",
+    "expected": "9610E33A131282CFD7971BC00ED816AF69615DCC0677BFCDD6944794A1F2DB1D",
+    "exists": true,
+    "actual": "9610E33A131282CFD7971BC00ED816AF69615DCC0677BFCDD6944794A1F2DB1D",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\Services\\AiCompletionService.cs",
+    "algorithm": "SHA256",
+    "expected": "12F99BD2316585FE9337A99A273407EF8AFA488E06F4ED906EE44D659C82103F",
+    "exists": true,
+    "actual": "12F99BD2316585FE9337A99A273407EF8AFA488E06F4ED906EE44D659C82103F",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\Services\\CentralWorkerClient.cs",
+    "algorithm": "SHA256",
+    "expected": "C917E2CF631A10AB61176F42885A5721705BE894A935E3F559854A567B0476D3",
+    "exists": true,
+    "actual": "C917E2CF631A10AB61176F42885A5721705BE894A935E3F559854A567B0476D3",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\Services\\CourseAutomationPolicy.cs",
+    "algorithm": "SHA256",
+    "expected": "F50F3C96173576CBE1EE2CC626DA9BC1EFC41F762B53732A0A79597979047316",
+    "exists": true,
+    "actual": "F50F3C96173576CBE1EE2CC626DA9BC1EFC41F762B53732A0A79597979047316",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\Services\\CourseraBot.cs",
+    "algorithm": "SHA256",
+    "expected": "AE2053270A0986955D676AB685E31225C30329775C19B1B938D00B7ECEC3ECF7",
+    "exists": true,
+    "actual": "AE2053270A0986955D676AB685E31225C30329775C19B1B938D00B7ECEC3ECF7",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\Services\\CourseraProfileIdentityCache.cs",
+    "algorithm": "SHA256",
+    "expected": "5768F45CEB789441F64690F46F514F095C181B4F043A4FDAA2AEFBF127E82BAE",
+    "exists": true,
+    "actual": "5768F45CEB789441F64690F46F514F095C181B4F043A4FDAA2AEFBF127E82BAE",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\Services\\WorkerLaunchOptions.cs",
+    "algorithm": "SHA256",
+    "expected": "B7E6DC48251C110CE31AC791FF4D9278DD5F7352C3EA5915B5FB706E12390F64",
+    "exists": true,
+    "actual": "B7E6DC48251C110CE31AC791FF4D9278DD5F7352C3EA5915B5FB706E12390F64",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\ViewModels\\MainViewModel.cs",
+    "algorithm": "SHA256",
+    "expected": "6B9203253628A081E6F5BC2FC8F16CB4B6E9AB9743D1F377711E18AFADF5D6BE",
+    "exists": true,
+    "actual": "6B9203253628A081E6F5BC2FC8F16CB4B6E9AB9743D1F377711E18AFADF5D6BE",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\obj\\Release\\net10.0-windows\\win-x64\\AutomationPlatform.Presentation.GlobalUsings.g.cs",
+    "algorithm": "SHA256",
+    "expected": "FE45EA572AADFD1A9B54CF7251405CFA11B748CA88B034F06A724D49758CED2D",
+    "exists": true,
+    "actual": "FE45EA572AADFD1A9B54CF7251405CFA11B748CA88B034F06A724D49758CED2D",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\obj\\Release\\net10.0-windows\\win-x64\\MainWindow.g.cs",
+    "algorithm": "SHA256",
+    "expected": "AB123348691877DB2C789D8732E3770E7D5A0709153C4A6AB73AE1807ED5EDDB",
+    "exists": true,
+    "actual": "AB123348691877DB2C789D8732E3770E7D5A0709153C4A6AB73AE1807ED5EDDB",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\obj\\Release\\net10.0-windows\\win-x64\\App.g.cs",
+    "algorithm": "SHA256",
+    "expected": "7E7761D17173EAA54DED8FBA1B8C79C077558CF5BB2EE8F433FEEC098863093C",
+    "exists": true,
+    "actual": "7E7761D17173EAA54DED8FBA1B8C79C077558CF5BB2EE8F433FEEC098863093C",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\obj\\Release\\net10.0-windows\\win-x64\\AutomationPlatform.Presentation_Content.g.cs",
+    "algorithm": "SHA256",
+    "expected": "BF0B05B83B6FA83D959FBE9344970B19A59A2CBF5E4CC7FE07168FF9B0097959",
+    "exists": true,
+    "actual": "BF0B05B83B6FA83D959FBE9344970B19A59A2CBF5E4CC7FE07168FF9B0097959",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\obj\\Release\\net10.0-windows\\win-x64\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs",
+    "algorithm": "SHA256",
+    "expected": "93D67476196EBFC80D1D7D8844B91146CFD678D105F5CE635EB900CA40610C9B",
+    "exists": true,
+    "actual": "93D67476196EBFC80D1D7D8844B91146CFD678D105F5CE635EB900CA40610C9B",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\obj\\Release\\net10.0-windows\\win-x64\\AutomationPlatform.Presentation.AssemblyInfo.cs",
+    "algorithm": "SHA256",
+    "expected": "371BC8549641F3D18C6FDB54E86FB78A52B2D10097D89CD4F000588649A942B3",
+    "exists": true,
+    "actual": "371BC8549641F3D18C6FDB54E86FB78A52B2D10097D89CD4F000588649A942B3",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\MainWindow.xaml",
+    "algorithm": "SHA256",
+    "expected": "6DD4475ACD05DDD3506ABE17A3F6E7198A9D7259F5C1295A22CCD9FA97590762",
+    "exists": true,
+    "actual": "6DD4475ACD05DDD3506ABE17A3F6E7198A9D7259F5C1295A22CCD9FA97590762",
+    "matches": true,
+    "matchingCandidates": []
+  },
+  {
+    "path": "E:\\Code\\cousera\\Acoursera\\src\\AutomationPlatform.Presentation\\App.xaml",
+    "algorithm": "SHA1",
+    "expected": "465C3B3E9538EEFD2C0461CE98F436AC20F4F860",
+    "exists": true,
+    "actual": "465C3B3E9538EEFD2C0461CE98F436AC20F4F860",
+    "matches": true,
+    "matchingCandidates": []
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "EngineSource": "D:\\Acose\\WorkerArtifacts\\worker-prepared-pdf-20260908",
+  "Files": [
+    {
+      "File": "AutomationPlatform.Presentation.exe",
+      "SHA256": "A2C12C94DFE5923454CF960F5748AB3F1879DA295FD35C0F8A512BD97D31121A"
+    },
+    {
+      "File": "AutomationPlatform.Presentation.dll",
+      "SHA256": "7E22C8571BA035837670E237B289A6BB0645DCFA6E6362B8EE774BC97F502AE1"
+    },
+    {
+      "File": "AutomationPlatform.Application.dll",
+      "SHA256": "9CEEAFFAE1CA227395B76F1D40B738146D967798E8C04CC5909DAA714FD707E2"
+    },
+    {
+      "File": "AutomationPlatform.Infrastructure.dll",
+      "SHA256": "481CE66898756FA1C366A6F4CC271F48418AA9548948EB5BD4926C0DFC3C11C5"
+    },
+    {
+      "File": "AutomationPlatform.Domain.dll",
+      "SHA256": "3687BB9E47100AE235C7FC96C4F9F8D75E0CDE5B9DB61FDC0D3876CBFAE8649B"
+    }
+  ],
+  "InstalledAt": "2026-09-14T22:20:19.6084987+07:00",
+  "EnrollmentUpdate": {
+    "InstalledAt": "2026-09-15T18:54:40.7006057+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\enrollment-20260915-184815\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\enrollment-20260915-184815\\Before",
+    "Checks": "27 browser fixtures passed; Release build 0 errors. Live: TRƯƠNG THIỀU LAM / Ideas to Action auto-enrolled and entered Module 1/5; test stopped in manager."
+  },
+  "PeerPdfUpdate": {
+    "InstalledAt": "2026-09-16T00:08:15.9999531+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\peer-pdf-20260916-000814-703\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\peer-pdf-20260916-000814-703\\Before",
+    "Checks": "Release net10.0-windows win-x64: 0 errors. Headless Edge: 61 PDF/upload/submission checks, 25 scanner checks, 27 enrollment regressions passed. No live customer submission performed.",
+    "PreparedPdfRoot": "D:\\Acose\\CustomerManager\\PreparedPdfs"
+  }
+}

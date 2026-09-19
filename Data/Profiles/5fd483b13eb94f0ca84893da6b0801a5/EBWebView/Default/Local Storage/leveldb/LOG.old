@@ -1,0 +1,8 @@
+2026/09/20-01:05:41.033 4c34 Reusing MANIFEST D:\Acose\CustomerManager\Data\Profiles\5fd483b13eb94f0ca84893da6b0801a5\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
+2026/09/20-01:05:41.035 4c34 Recovering log #16
+2026/09/20-01:05:41.035 4c34 Level-0 table #19: started
+2026/09/20-01:05:41.079 4c34 Level-0 table #19: 17339 bytes OK
+2026/09/20-01:05:41.079 4c34 Recovering log #19
+2026/09/20-01:05:41.083 4c34 Reusing old log D:\Acose\CustomerManager\Data\Profiles\5fd483b13eb94f0ca84893da6b0801a5\EBWebView\Default\Local Storage\leveldb/000019.log 
+2026/09/20-01:05:41.159 4c34 Delete type=0 #16
+2026/09/20-01:05:41.159 4c34 Delete type=2 #20

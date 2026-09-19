@@ -1,0 +1,49 @@
+2026-09-18 09:40:17.511: [INFO] CurrentProfilePath: D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default
+2026-09-18 09:40:17.511: [INFO] Profiles total count: 1
+2026-09-18 09:40:17.511: [INFO] Profile: name=Profile 1 path=D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default lastActive=null
+2026-09-18 09:40:17.511: [INFO] LastUsedProfileDir: D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default
+2026-09-18 09:40:17.511: [INFO] OnDoneLoading sync enabled: 0
+2026-09-18 09:40:17.511: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-09-18 09:40:17.511: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-09-18 09:40:17.511: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-18 10:08:02.418: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-18 10:09:34.587: [INFO] CurrentProfilePath: D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default
+2026-09-18 10:09:34.587: [INFO] Profiles total count: 1
+2026-09-18 10:09:34.587: [INFO] Profile: name=Profile 1 path=D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default lastActive=2026-09-18T10:07:36.259Z
+2026-09-18 10:09:34.587: [INFO] LastUsedProfileDir: D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default
+2026-09-18 10:09:34.587: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default lastActive=2026-09-18T10:07:36.259Z
+2026-09-18 10:09:34.587: [INFO] OnDoneLoading sync enabled: 0
+2026-09-18 10:09:34.587: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-09-18 10:09:34.587: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-09-18 10:09:34.587: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-18 10:36:34.722: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-18 10:39:36.744: [INFO] CurrentProfilePath: D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default
+2026-09-18 10:39:36.744: [INFO] Profiles total count: 1
+2026-09-18 10:39:36.744: [INFO] Profile: name=Profile 1 path=D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default lastActive=2026-09-18T10:36:31.513Z
+2026-09-18 10:39:36.744: [INFO] LastUsedProfileDir: D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default
+2026-09-18 10:39:36.744: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default lastActive=2026-09-18T10:36:31.513Z
+2026-09-18 10:39:36.744: [INFO] OnDoneLoading sync enabled: 0
+2026-09-18 10:39:36.744: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-09-18 10:39:36.744: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-09-18 10:39:36.744: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-18 10:40:22.961: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-18 10:40:40.626: [INFO] CurrentProfilePath: D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default
+2026-09-18 10:40:40.626: [INFO] Profiles total count: 1
+2026-09-18 10:40:40.627: [INFO] Profile: name=Profile 1 path=D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default lastActive=2026-09-18T10:36:31.513Z
+2026-09-18 10:40:40.627: [INFO] LastUsedProfileDir: D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default
+2026-09-18 10:40:40.627: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default lastActive=2026-09-18T10:36:31.513Z
+2026-09-18 10:40:40.627: [INFO] OnDoneLoading sync enabled: 0
+2026-09-18 10:40:40.627: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-09-18 10:40:40.627: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-09-18 10:40:40.627: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-18 16:57:15.395: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-18 16:57:38.791: [INFO] CurrentProfilePath: D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default
+2026-09-18 16:57:38.791: [INFO] Profiles total count: 1
+2026-09-18 16:57:38.791: [INFO] Profile: name=Profile 1 path=D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default lastActive=2026-09-18T16:57:15.035Z
+2026-09-18 16:57:38.791: [INFO] LastUsedProfileDir: D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default
+2026-09-18 16:57:38.791: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=D:\Acose\CustomerManager\Data\Profiles\42a0a43da5d940b7b00c0cec4fcc810f\EBWebView\Default lastActive=2026-09-18T16:57:15.035Z
+2026-09-18 16:57:38.791: [INFO] OnDoneLoading sync enabled: 0
+2026-09-18 16:57:38.791: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-09-18 16:57:38.791: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-09-18 16:57:38.791: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-19 10:08:35.732: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1

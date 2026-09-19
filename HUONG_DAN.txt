@@ -1,0 +1,43 @@
+ACOSE — QUẢN LÝ KHÁCH HÀNG
+
+MỞ CÔNG CỤ
+Nhấp đúp Acose.CustomerManager.exe trong thư mục này.
+Dùng tài khoản Windows hiện tại. Máy này đã có các thành phần .NET cần thiết.
+
+NHẬN KHÁCH TỪ WEB
+Khách vẫn đăng nhập qua https://acose-v-i-p.fly.dev/ như trước.
+Khi hệ thống cũ đã tạo phiên trên máy, trình quản lý nhận thêm hồ sơ từ
+D:\Acose\WorkerProfiles. Có thể bấm “Nhận đơn mới”; ứng dụng cũng kiểm tra mỗi 10 giây.
+Website và bộ nhận đăng nhập hiện tại vẫn cần hoạt động như trước.
+
+THÊM ĐƠN THỦ CÔNG
+1. Bấm “Thêm khách / đơn thủ công”.
+2. Nhập đầy đủ họ tên, dán link khóa học (mỗi dòng một link, có thể thêm sau).
+3. Bấm “Tạo đơn và đăng nhập”. Hoàn tất đăng nhập trong cửa sổ Coursera rồi đóng cửa sổ đó.
+Mỗi khách được quản lý trong một đơn chứa nhiều link. Tên được chuyển thành IN HOA.
+
+THAO TÁC TRÊN ĐƠN
+- “Thêm link”, “Sửa link”: chỉnh danh sách khóa học. Tên/link sửa chỉ lưu trên máy này.
+- “Chạy”: tự chạy một khóa. “Chạy cả đơn”: xếp các khóa chưa xong để chạy đồng thời.
+- Tối đa 5 khóa chạy cùng lúc theo cấu hình cũ; đổi tại “Thiết lập” nếu cần.
+- “Dừng”: dừng riêng khóa đó. “Dừng cả đơn”: dừng auto của khách đang chọn.
+- “Mở kiểm tra”: mở đúng tài khoản và đúng link, để bạn thao tác bằng tay; không tự chạy auto.
+- Cửa sổ kiểm tra đóng riêng. Khi đóng trình quản lý, công cụ hỏi trước khi dừng các phiên đang mở.
+
+TIẾN ĐỘ
+Phần trăm lấy từ báo cáo của bộ auto. Hiển thị “Chưa có tiến độ” khi chưa nhận được báo cáo.
+“Xong auto” nghĩa là bộ auto đã báo hoàn tất phần xử lý; vẫn có thể còn nội dung chờ chấm
+hoặc cần kiểm tra thủ công. Đọc dòng trạng thái của khóa và dùng “Mở kiểm tra” khi cần.
+Đóng hoặc lỗi cửa sổ không được tính là hoàn thành.
+Nếu phiên đã hết hạn: bấm “Mở đăng nhập”, đăng nhập lại rồi chạy khóa.
+
+DỮ LIỆU VÀ SAO LƯU
+Data\manager-data.json: đơn và tiến độ. Có bản dự phòng .bak.
+Data\Profiles: các phiên đăng nhập mới tạo bằng công cụ này.
+Hồ sơ đã có tiếp tục dùng thư mục D:\Acose\WorkerProfiles; không xóa hoặc di chuyển thư mục đó.
+Data\engine-settings.protected: cấu hình auto mã hóa cho tài khoản Windows hiện tại.
+Không xóa các thư mục Data hoặc Engine. Đóng tool rồi sao lưu toàn bộ thư mục này cùng
+D:\Acose\WorkerProfiles nếu muốn giữ cả đơn và phiên đăng nhập cũ.
+
+Bản AccountManager cũ vẫn ở D:\Acose\AccountManager.
+Không điều khiển cùng khóa cùng lúc bằng cả hai trình quản lý.

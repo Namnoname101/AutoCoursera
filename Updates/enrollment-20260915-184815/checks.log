@@ -1,0 +1,28 @@
+PASS Already enrolled enters course despite advertising
+PASS Organization course enrollment with dated CTA
+PASS Initial CTA is not clicked twice
+PASS Actual FPT organization confirmation
+PASS Confirmation is not resubmitted
+PASS React replacement does not resubmit confirmation
+PASS Nested modal wrappers are one dialog
+PASS Unrelated Continue is untouched
+PASS Unknown dialog prevents background enrollment
+PASS Trial confirmation is untouched
+PASS Free label does not conceal trial
+PASS Explicit free confirmation
+PASS Nested role wrapper clicks the real button
+PASS Identical responsive CTAs click once
+PASS Different enrollment choices are ambiguous
+PASS Other course and external links are untouched
+PASS Hidden disabled and sidebar controls are untouched
+PASS Multiple dialogs are ambiguous
+PASS Enrollment start can be disabled
+PASS Stale document cannot act
+PASS Legacy course-entry attribute stays supported
+PASS Paid landing reports the gate
+PASS New document starts enrollment
+PASS Same page modal is handled after Enroll
+PASS Organization switch reload allows next Enroll
+PASS Enrollment resolves to the course entry
+PASS Organization program course route is supported
+All 27 enrollment checks passed.

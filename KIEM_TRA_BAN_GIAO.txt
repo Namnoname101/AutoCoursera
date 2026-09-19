@@ -1,0 +1,24 @@
+ACOSE CUSTOMER MANAGER 1.0.0 — KIỂM TRA BÀN GIAO
+Ngày 14/09/2026
+
+Đã biên dịch bản Release và đóng gói vào D:\Acose\CustomerManager.
+Đã kiểm tra 44 điều kiện, gồm:
+- Chuẩn hóa tên tiếng Việt thành IN HOA; kiểm tra và loại link trùng.
+- Nhận hồ sơ đã có trên máy; sửa/xóa link không bị hoàn tác khi làm mới.
+- Lưu tiến độ; đọc lại dữ liệu; khôi phục bản dự phòng khi file chính lỗi.
+- Giao tiếp trực tiếp bằng mã CentralWorkerClient của engine hiện tại.
+- Hai khóa cùng khách có job riêng; yêu cầu dừng một khóa không tác động khóa kia.
+- Báo tiến độ, kết quả cuối, chờ thao tác và thiếu đăng nhập.
+- Chế độ mở kiểm tra tách khỏi tự chạy khóa.
+- Xác thực bridge nội bộ; mã hóa cấu hình auto bằng Windows DPAPI.
+- Khởi chạy engine được đóng gói, mở và đóng một phiên kiểm tra trống thành công.
+
+Đã mở giao diện mẫu và kiểm tra đóng ứng dụng thành công.
+Đã mở ứng dụng thật; nhận 10 hồ sơ khách và 29 link khóa học ban đầu.
+
+Các kiểm tra do người thực hiện chạy không làm bài học/đánh giá trên tài khoản khách.
+Tiến độ do engine hiện tại báo; “Xong auto” không tự khẳng định chứng chỉ đã được cấp
+hoặc các bài chờ chấm đã có kết quả. Dòng hoạt động của engine được giữ để kiểm tra.
+
+Các DLL/EXE chính của engine đã được so sánh SHA-256 với bản prepared-pdf gốc.
+Xem engine-manifest.json. Không sửa thuật toán tự động hóa của engine.
