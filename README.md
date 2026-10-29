@@ -1,7 +1,19 @@
 # 🎓 Coursera Automation Suite (ACOSE Customer Manager)
 
+<p align="center">
+  <img src="https://img.shields.io/badge/.NET-10.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 10" />
+  <img src="https://img.shields.io/badge/UI-WPF%20XAML-0078D7?style=for-the-badge&logo=windows&logoColor=white" alt="WPF" />
+  <img src="https://img.shields.io/badge/Engine-WebView2-0078D4?style=for-the-badge&logo=microsoftedge&logoColor=white" alt="WebView2" />
+  <img src="https://img.shields.io/badge/Automation-Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white" alt="Playwright" />
+  <img src="https://img.shields.io/badge/OS-Windows%2010%2F11-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows" />
+</p>
+
 > **Giải pháp Desktop toàn diện hỗ trợ quản lý học viên và tự động hóa học tập trên nền tảng Coursera.**  
 > Được thiết kế theo kiến trúc module hóa với giao diện WPF hiện đại, tích hợp Microsoft WebView2 & Playwright Engine, hỗ trợ chạy song song đa luồng và cách ly hồ sơ trình duyệt an toàn.
+
+<p align="center">
+  <img src="docs/preview.png" alt="Giao diện ACOSE Quản lý Khách hàng & Tự động hóa Coursera" width="920" style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);" />
+</p>
 
 ---
 
