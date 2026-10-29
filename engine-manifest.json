@@ -7,7 +7,7 @@
     },
     {
       "File": "AutomationPlatform.Presentation.dll",
-      "SHA256": "100691961362DF37A2AA9312C588650EDF988A2C0651980779DA9EAE314A43C1"
+      "SHA256": "8018F500F110C7DA004B89C68328272D2A88DD954431F4310F06B4D9B6A501D5"
     },
     {
       "File": "AutomationPlatform.Application.dll",
@@ -27,7 +27,7 @@
     "InstalledAt": "2026-09-15T18:54:40.7006057+07:00",
     "Source": "D:\\Acose\\CustomerManager\\Updates\\enrollment-20260915-184815\\Source",
     "Backup": "D:\\Acose\\CustomerManager\\Updates\\enrollment-20260915-184815\\Before",
-    "Checks": "27 browser fixtures passed; Release build 0 errors. Live: TRƯƠNG THIỀU LAM / Ideas to Action auto-enrolled and entered Module 1/5; test stopped in manager."
+    "Checks": "27 browser fixtures passed; Release build 0 errors. Live: NGUYEN MINH ANH / Ideas to Action auto-enrolled and entered Module 1/5; test stopped in manager."
   },
   "PeerPdfUpdate": {
     "InstalledAt": "2026-09-16T22:18:36.1884759+07:00",
@@ -42,5 +42,165 @@
     "Backup": "D:\\Acose\\CustomerManager\\Updates\\peer-review-20260917-131906-771\\Before",
     "Checks": "Release WebView2 win-x64: 0 errors, 17 existing warnings. 418 local checks passed: PDF125, scanner44, review194, enrollment27, profile28. Review now fills one field per fresh-DOM tick, waits for retained state, bounded retries and delayed Submit. Profile startup has bounded identity reads/report plus generation-guarded DOM-ready fallback and stale/duplicate navigation suppression. No live review submitted; WPF live event timing not re-tested.",
     "PreparedPdfRoot": "D:\\Acose\\CustomerManager\\PreparedPdfs"
+  },
+  "QuizOpeningUpdate": {
+    "InstalledAt": "2026-09-22T02:07:01.1836293+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\quiz-opening-20260922-020700-036\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\quiz-opening-20260922-020700-036\\Before",
+    "Checks": "32 headless Chrome checks passed; Release win-x64 build 0 errors; installed dependency/assembly identity, WPF type loading, embedded probe and generated script checks passed. No live quiz submitted."
+  },
+  "PdfRestoreUpdate": {
+    "InstalledAt": "2026-09-23T00:48:52.6367716+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\pdf-restore-20260923-004849-499\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\pdf-restore-20260923-004849-499\\Before",
+    "PreviousActualSha256": "2B3EA75A767D0471743328D2B94B758543D678CF14C6FB322742C018CC3FDA07",
+    "Checks": "Release win-x64 0 errors; 125 PDF + 24 Vietnamese + 44 scanner + 26 compiled assembly checks passed. Local synthetic fixtures only, no real upload/submission. Existing C# and SQLite NU1903 warnings remain; dependencies unchanged."
+  },
+  "AiPeerPdfUpdate": {
+    "InstalledAt": "2026-09-23T01:55:56.1692692+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\ai-peer-pdf-20260923-015553-636\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\ai-peer-pdf-20260923-015553-636\\Before",
+    "PreviousActualSha256": "F85F30610A2C197935E78A0607B2EA2BD4AB1DF63261A69C5827DFBFDC5A3C2D",
+    "Checks": "454 local checks passed: context 55, draft contract 87, renderer HTML 28, flow/cache 54, existing PDF 125, Vietnamese 24, scanner 44, compiled assembly 36, native WebView2 renderer 1. Two PDF pages visually checked. No live AI-provider request or real assignment submission performed."
+  },
+  "PeerSubmitRouteFix": {
+    "InstalledAt": "2026-09-23T15:05:46.1299473+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\peer-submit-route-20260923-150542-125\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\peer-submit-route-20260923-150542-125\\Before",
+    "PreviousActualSha256": "D003C7ECDB4CD7BE6D44D0B08C971792F4B7D38714FB2353E8ED5E9E63E44F20",
+    "Checks": "303 local checks passed: route regressions 33, assignment context 55, PDF upload 125, flow/cache 54, compiled assembly 36. Affected /submit route confirmed from targeted read-only profile history. No live AI request or real assignment submission."
+  },
+  "PeerResearchAutoUpdate": {
+    "InstalledAt": "2026-09-23T15:43:40.3002952+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\peer-research-auto-20260923-154336-174\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\peer-research-auto-20260923-154336-174\\Before",
+    "PreviousActualSha256": "F09A13FE58FC8EA776E17BE75A8735B215C1C0475C4BC97DC8C5FF11C46E7F04",
+    "Checks": "62 evidence + 57 writer/checkpoint + 64 context + 33 route + 125 upload + 54 flow/cache + 87 draft + 28 renderer + 39 assembly checks; live World Bank fetch; 11-page WebView2 render and visual QA; no real assignment submissions"
+  },
+  "PeerWordLimitFix": {
+    "InstalledAt": "2026-09-24T01:34:29.2957771+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\peer-wordlimit-fix-20260924-013426-980\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\peer-wordlimit-fix-20260924-013426-980\\Before",
+    "PreviousActualSha256": "31932B4E65C94F999CE1162751501C2903E83ED5044DAE561492CD963F407812",
+    "Checks": "54 writer + 51 checkpoint + 8 progress + 54 flow/cache + 125 upload + 42 compiled assembly checks passed; isolated archive replay recovered9/9sections with0AIcalls and46originalrepliesunchanged; zero live submissions"
+  },
+  "DiscussionAiReplyUpdate": {
+    "InstalledAt": "2026-09-24T12:58:28.8612721+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\discussion-ai-reply-20260924-125825-147\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\discussion-ai-reply-20260924-125825-147\\Before",
+    "PreviousActualSha256": "FF1606DFAC12237829A3604445156A803735649CF6126442D328C4FFA6D105D2",
+    "Checks": "Release build passed; discussion: 34 DOM, 7 helper, 113 draft, 32 journal, 41 Main flow; quiz: 34 DOM, 9 helper, 88 memory, 31 actual solve/flow; 57 compiled assembly checks. Synthetic only; no live submissions."
+  },
+  "QuizFeedbackLearningUpdate": {
+    "InstalledAt": "2026-09-24T12:58:28.8723909+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\discussion-ai-reply-20260924-125825-147\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\discussion-ai-reply-20260924-125825-147\\Before",
+    "Checks": "Release build passed; discussion: 34 DOM, 7 helper, 113 draft, 32 journal, 41 Main flow; quiz: 34 DOM, 9 helper, 88 memory, 31 actual solve/flow; 57 compiled assembly checks. Synthetic only; no live submissions."
+  },
+  "DeferredQuizReturnUpdate": {
+    "InstalledAt": "2026-09-24T13:24:27.1360736+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\deferred-quiz-20260924-132413-940\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\deferred-quiz-20260924-132413-940\\Before",
+    "PreviousActualSha256": "34CB4416D4400C5E8A5C900136FEEC3968994E6EE875D71FA0F68E15232786B9",
+    "Checks": "Release build passed; 77 durable queue checks, 24 actual scanner Chrome checks, 56 linked Main deferred flow checks, 31 actual quiz solve/feedback regression checks, 62 compiled assembly checks. Synthetic only; no live submissions."
+  },
+  "ProfileBootstrapRecoveryUpdate": {
+    "InstalledAt": "2026-09-24T14:47:23.5314674+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\profile-bootstrap-recovery-20260924-144721-267\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\profile-bootstrap-recovery-20260924-144721-267\\Before",
+    "PreviousActualSha256": "81DF13D2A1D3BA1587DCAB51D4CA97E7F8C3E42C4D758BA56E30DB04713DA4F4",
+    "Checks": "Direct course startup, no name gate or Account settings detour. Release build; 34 actual-source startup flow, 6 actual JS probe, 77 queue, 56 deferred flow, 31 quiz feedback flow, 67 compiled assembly checks; unchanged course dispatch comparison. Synthetic tests only."
+  },
+  "FeedbackOpeningUpdate": {
+    "InstalledAt": "2026-09-24T15:08:14.0058004+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\feedback-opening-20260924-150812-277\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\feedback-opening-20260924-150812-277\\Before",
+    "PreviousActualSha256": "4454EDEE0893CCD41DCCB3F8D7537F5C77860445F15E3D3939C1A4F329813845",
+    "Checks": "Release build; 31 offline opening/status/memory tests, 34 original feedback probe, 27 actual opening flow, 31 quiz feedback flow, 56 deferred flow, 69 compiled assembly/resource checks. Native verified View feedback opening; grade-before-Resume; scoped bounded reads; no live submissions."
+  },
+  "FeedbackDomRouteUpdate": {
+    "InstalledAt": "2026-09-24T23:51:06.523158+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\feedback-dom-route-20260924-235104-012\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\feedback-dom-route-20260924-235104-012\\Before",
+    "PreviousActualSha256": "31988584800FD4A88531F76EF292F9A23E8AF4A15797C12324C953D7AA842061",
+    "Checks": "Release build successful; supplied HTML fixture 19; route/persistence 21; actual opening flow 18; opening regression 31; feedback probe 34; compiled candidate assembly 72; deferred queue 77; deferred flow 56; quiz feedback flow 31. All passed, synthetic/offline only, no live submissions."
+  },
+  "FeedbackScopeUpdate": {
+    "InstalledAt": "2026-09-25T00:16:02.9819343+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\feedback-scope-20260925-001601-139\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\feedback-scope-20260925-001601-139\\Before",
+    "PreviousActualSha256": "A0D35EF31959CB5E9F99A23364EAAE908D3CFDB7CA34316C9DC890EE0FDCE22D",
+    "Checks": "Release build successful; question scope regression 25; existing feedback probe 34; actual user HTML fixture 19; learning flow and status checks 35; compiled candidate assembly 72. All passed. Offline synthetic tests only; no live course submission. User diagnostic confirmed outsideQuestion=true."
+  },
+  "PeerResultUpdate": {
+    "InstalledAt": "2026-09-25T00:52:49.3572758+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\peer-result-fix-20260925-005246-454\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\peer-result-fix-20260925-005246-454\\Before",
+    "PreviousActualSha256": "5D1120F3D67DF8F6C2FE1BA7EFF50E04682447BFCD64F2FF35D9723BD9E63973",
+    "Checks": "Release build passed; numeric grade classifier 47; own-submission route guards 18; linked production workflow 19; existing PDF upload/library 125; existing reviews 194; compiled assembly/source 72. All passed offline/synthetic, no live coursework submissions. Exact live diagnostic confirms own submission Failed6/30 and review Completed."
+  },
+  "PeerPdfRevisionUpdate": {
+    "InstalledAt": "2026-09-25T01:35:16.3576575+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\peer-pdf-revision-20260925-013514-502\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\peer-pdf-revision-20260925-013514-502\\Before",
+    "PreviousActualSha256": "6F15C04005005B2AD716CCBA784C9FD5D5375F243FE8C2CB529890AD47EABC06",
+    "Checks": "Release build 0 errors; revision DOM/SPA75; cache/contract70; linked workflow36; compiled assembly86; PDF regression125; review194; result47; route18; draft87. Offline fixtures only, no live submission. Host left stopped."
+  },
+  "PeerPdfConfirmationUpdate": {
+    "InstalledAt": "2026-09-27T12:53:05.3702743+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\peer-pdf-confirm-20260927-125301-065\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\peer-pdf-confirm-20260927-125301-065\\Before",
+    "PreviousActualSha256": "3CF8E7F2D4BA726BBA4725CFD81A540AFD0D2B24A252447FA788349D0706FC25",
+    "Checks": "Build passed; 93 new + 75 regression browser checks, 70 new + 70 regression cache checks, 57 linked-production flow checks, 96 candidate assembly checks passed. Offline fixtures only; no live submission test. Host kept stopped.",
+    "WorkerHost": "Kept stopped at user request"
+  },
+  "PeerPdfLivePassUpdate": {
+    "InstalledAt": "2026-09-28T00:23:35.7199445+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\peer-pdf-live-pass-20260928-002333-288\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\peer-pdf-live-pass-20260928-002333-288\\Before",
+    "PreviousActualSha256": "BA0170D8C163165CF941F55B48700836D3FA4A2A91FC162DEF8314A20724BA30",
+    "Checks": "Live proof: user manually submitted generated revision and confirmed pass. Offline browser probes 95+87 passed; cache suites 70+70 passed; linked flow suites 60+37 passed; Release win-x64 build 0 errors; assembly checks 96 passed.",
+    "LiveEvidence": "User manually submitted the generated revision and confirmed it passed",
+    "WorkerHost": "Kept stopped at user request"
+  },
+  "ResearchFallbackUpdate": {
+    "InstalledAt": "2026-09-28T00:50:53.8017184+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\research-fallback-20260928-005050-840\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\research-fallback-20260928-005050-840\\Before",
+    "PreviousActualSha256": "4D1D83CB764458D61F97F1AE179202576076C46783B1D4543E915A71BCAE868E",
+    "Checks": "Research fallback 15; research writer 57; generic draft 87; word-limit 54; evidence 62; AI PDF flow 54; confirmation probe 95/cache 70/flow 60; revision probe 87/cache 70/flow 37; full assembly 96; fallback assembly 10; Release build 0 errors",
+    "WorkerHost": "Kept stopped at user request"
+  },
+  "PeerReviewAiUpdate": {
+    "InstalledAt": "2026-09-28T19:08:14.0423117+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\peer-review-ai-20260928-190811-137\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\peer-review-ai-20260928-190811-137\\Before",
+    "PreviousActualSha256": "ADC93BAE0430F3D6CCD264C5BF4805F7C50BAF69D5AFBBA7D282D381441BAAF9",
+    "Checks": "Presentation build passed; 194 review regressions; 51 AI contract; 14 contextual probe; 7 terminal completion; 14 PDF metadata; 14 assembly checks.",
+    "WorkerHost": "Kept stopped at user request"
+  },
+  "PeerDialogHeadingFixUpdate": {
+    "InstalledAt": "2026-09-28T19:28:41.2735829+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\peer-dialog-heading-fix-20260928-192838-119\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\peer-dialog-heading-fix-20260928-192838-119\\Before",
+    "PreviousActualSha256": "87A5FDD48A6F8758D4A58B4DC4E8C592675FC882E7FE592D9D19F610F9123E20",
+    "Checks": "Release win-x64 build 0 errors; 93 browser probe checks; 70 confirmation cache checks; 70 revision cache checks; 24 confirmation flow checks; 25 revision flow checks; 96 full candidate assembly/resource checks; 14 AI review/PDF regression assembly checks. Offline fixtures only; no live submission.",
+    "WorkerHost": "Kept stopped at user request"
+  },
+  "WorkerContinuationUpdate": {
+    "InstalledAt": "2026-09-28T20:56:18.8666862+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\worker-continuation-fix-20260928-205611-237\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\worker-continuation-fix-20260928-205611-237\\Before",
+    "PreviousActualSha256": "A49317BB7B97ADC6A1E6BEE6C7586503D95B839D33F52DD908E6EAEB87F097F9",
+    "Checks": "Release build: 0 errors; pending probe: 66; pending flow: 30; confirmation probe: 95; confirmation flow: 60; revision flow: 39; optional browser/scanner: 24; discussion probes: 51+28; discussion linked flow: 45; discussion helper: 7; candidate assembly: 107. Offline synthetic fixtures; no live course submissions.",
+    "WorkerHost": "Kept stopped at user request"
+  },
+  "OptionalActivityUpdate": {
+    "InstalledAt": "2026-09-29T01:03:27.4030749+07:00",
+    "Source": "D:\\Acose\\CustomerManager\\Updates\\optional-activity-update-20260929-010321-510\\Source",
+    "Backup": "D:\\Acose\\CustomerManager\\Updates\\optional-activity-update-20260929-010321-510\\Before",
+    "PreviousActualSha256": "DA81F7CA4294D56EB8C7CE7CB7CE323B4DBCCEDDAC57F92B615812006FEE1D21",
+    "Checks": "29 optional activity browser regressions; 107 compiled assembly checks; Release build succeeded with 0 errors and 16 existing warnings. Blank optional plugin and text-arrow Next covered. No live course actions tested.",
+    "WorkerHost": "Kept stopped at user request"
   }
 }

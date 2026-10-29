@@ -51,6 +51,7 @@ public sealed class ManagerController : ObservableObject
     public string StatusMessage { get => _statusMessage; private set => Set(ref _statusMessage, value); }
     public bool IsBusy { get => _isBusy; private set => Set(ref _isBusy, value); }
     public string EnginePath { get; }
+    public string WebsiteProfileRoot => _data.ImportRoots.FirstOrDefault() ?? "";
     public bool HasActiveWork => _active.Count != 0 || Orders.Any(o => o.Courses.Any(c => c.State == CourseState.Queued));
     public string SummaryText => $"{Orders.Count} khách · {Orders.Sum(o => o.Courses.Count(c => c.IsRunning))} khóa đang chạy · {Orders.Sum(o => o.Courses.Count(c => c.State == CourseState.Queued))} đang chờ";
     public int MaxParallel
@@ -78,7 +79,7 @@ public sealed class ManagerController : ObservableObject
             Changed(); Filter(); SelectedOrder = VisibleOrders.FirstOrDefault();
             Persist();
             StatusMessage = recoveryWarning ?? _store.LastWarning ?? (imported > 0
-                ? $"Đã nhận {imported} khách đã có trên máy. Chọn khách để thao tác."
+                ? $"Đã nhận {imported} khách từ profile trên máy. Chưa tự chạy khóa học."
                 : "Sẵn sàng. Chọn khách hoặc thêm đơn mới.");
         }
         finally { IsBusy = false; }
@@ -123,12 +124,27 @@ public sealed class ManagerController : ObservableObject
         foreach (var order in Orders)
         {
             if (!order.SessionBusy && string.IsNullOrEmpty(order.SessionNote))
-                order.SessionNote = "Mở kiểm tra để xem hoặc đăng nhập tài khoản của khách.";
+                order.SessionNote = order.Source == "Website"
+                    ? "Dùng profile khách đã đăng nhập trên PC này. Nếu phiên hết hạn, cần đăng nhập lại."
+                    : "Mở kiểm tra để xem hoặc đăng nhập tài khoản của khách.";
         }
         Changed(); Filter(); Persist();
-        if (imported > 0) StatusMessage = $"Đã nhận thêm {imported} khách từ dữ liệu trên máy.";
+        if (imported > 0) StatusMessage = $"Đã nhận thêm {imported} khách từ profile trên máy. Chọn khóa rồi bấm Chạy khi bạn muốn.";
         else if (_store.LastWarning != null) StatusMessage = _store.LastWarning;
         return Task.CompletedTask;
+    }
+    public void SetWebsiteProfileRoot(string value)
+    {
+        GuardPreview();
+        string root = WebsiteProfileImportSettings.NormalizeRoot(value);
+        List<string> previous = _data.ImportRoots;
+        _data.ImportRoots = root.Length == 0 ? [] : [root];
+        try { Persist(); }
+        catch { _data.ImportRoots = previous; throw; }
+        Notify(nameof(WebsiteProfileRoot));
+        StatusMessage = root.Length == 0
+            ? "Đã tắt nhận khách mới từ website; khách và profile đã nhập được giữ nguyên."
+            : "Đã bật nhận profile website trên PC này. Bấm Làm mới hoặc chờ tối đa 10 giây.";
     }
     public async Task<CustomerOrder> AddOrderAsync(string name, IEnumerable<string> links)
     {

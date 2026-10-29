@@ -1,0 +1,11 @@
+{
+  "_comment": "Tệp mẫu tham khảo cấu hình Engine. Mặc định hệ thống tự động hóa hoạt động ở chế độ Prepared PDFs không cần AI.",
+  "AI_MODE": "prepared",
+  "SUPPORTED_MODES": ["prepared", "ai"],
+  "ENVIRONMENT_VARIABLES": {
+    "ACOSE_PEER_PDF_MODE": "prepared (hoặc 'ai' nếu muốn tự sinh nội dung theo rubric)",
+    "AGENTROUTER_API_KEY": "Khóa API nếu sử dụng AI Completion Service (tùy chọn)",
+    "AGENTROUTER_MODEL": "Tên model AI muốn chỉ định (ví dụ: gpt-4o, claude-3-5-sonnet, gemini-1.5-pro)",
+    "AGENTROUTER_CODEX_PATH": "Đường dẫn codex/prompt bổ trợ (tùy chọn)"
+  }
+}

@@ -15,6 +15,10 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        if (e.Args.Contains("--website-import-self-test"))
+        {
+            Shutdown(WebsiteImportTestRunner.Run(e.Args)); return;
+        }
         try
         {
             string baseDirectory = AppContext.BaseDirectory;

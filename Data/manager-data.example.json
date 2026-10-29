@@ -1,0 +1,60 @@
+{
+  "Version": 1,
+  "MaxParallel": 5,
+  "Orders": [
+    {
+      "Id": "00000000000000000000000000000001",
+      "Name": "NGUYEN MINH ANH",
+      "ProfilePath": "Data\\Profiles\\example-user-1",
+      "Source": "Thủ công",
+      "CreatedAt": "2026-10-30T00:00:00+07:00",
+      "Courses": [
+        {
+          "Id": "10000000000000000000000000000001",
+          "Url": "https://www.coursera.org/learn/learning-how-to-learn",
+          "Progress": 65,
+          "State": 3,
+          "Activity": "Đang xử lý nội dung trong Module 3.",
+          "CurrentModule": 3,
+          "TotalModules": 4,
+          "LastUpdated": "2026-10-30T00:00:00+07:00"
+        },
+        {
+          "Id": "10000000000000000000000000000002",
+          "Url": "https://www.coursera.org/learn/python",
+          "Progress": 100,
+          "State": 7,
+          "Activity": "✅ Đã hoàn thành toàn bộ các bài trong khóa học.",
+          "CurrentModule": 4,
+          "TotalModules": 4,
+          "LastUpdated": "2026-10-30T00:00:00+07:00"
+        }
+      ],
+      "ObservedExternalUrls": []
+    },
+    {
+      "Id": "00000000000000000000000000000002",
+      "Name": "TRAN HOANG NAM",
+      "ProfilePath": "Data\\Profiles\\example-user-2",
+      "Source": "Thủ công",
+      "CreatedAt": "2026-10-30T00:00:00+07:00",
+      "Courses": [
+        {
+          "Id": "20000000000000000000000000000001",
+          "Url": "https://www.coursera.org/learn/excel-basics-data-analysis-ibm",
+          "Progress": 0,
+          "State": 0,
+          "Activity": "Sẵn sàng",
+          "CurrentModule": 1,
+          "TotalModules": 5,
+          "LastUpdated": "2026-10-30T00:00:00+07:00"
+        }
+      ],
+      "ObservedExternalUrls": []
+    }
+  ],
+  "Runs": [],
+  "ImportRoots": [
+    "D:\\Acose\\WorkerProfiles"
+  ]
+}

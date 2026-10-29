@@ -137,14 +137,20 @@ public partial class MainWindow : Window
     {
         var parallel = new DialogField("Số khóa được chạy đồng thời tối đa", _controller.MaxParallel.ToString(CultureInfo.InvariantCulture));
         var engine = new DialogField("Bản tự động hóa đang sử dụng", _controller.EnginePath, readOnly: true);
+        var website = new DialogField("Nhận khách website: thư mục WorkerProfiles (để trống để tắt)", _controller.WebsiteProfileRoot);
         var dialog = new EditDialog(this, "Thiết lập nâng cao",
-            "Giới hạn áp dụng cho tất cả khách hàng. Khi chạy cả đơn, nhiều khóa được chạy cùng lúc; các khóa vượt giới hạn sẽ chờ lượt.",
-            [parallel, engine], "Lưu thiết lập", () =>
+            "Giới hạn áp dụng cho tất cả khách hàng. Để nhận khách từ website, Worker Host phải chạy trên cùng PC. Ví dụ thư mục D:\\Acose\\WorkerProfiles; chỉ nhập profile hoàn tất trong _ManagedAccounts, không tự chạy khóa học.",
+            [parallel, website, engine], "Lưu thiết lập", () =>
             {
                 if (!int.TryParse(parallel.Value, out int value) || value is < 1 or > 64)
                     throw new InvalidOperationException("Số khóa đồng thời phải là số nguyên từ 1 đến 64.");
+                WebsiteProfileImportSettings.NormalizeRoot(website.Value);
             });
-        if (dialog.ShowDialog() == true) Run(() => _controller.MaxParallel = int.Parse(parallel.Value, CultureInfo.InvariantCulture));
+        if (dialog.ShowDialog() == true) Run(() =>
+        {
+            _controller.SetWebsiteProfileRoot(website.Value);
+            _controller.MaxParallel = int.Parse(parallel.Value, CultureInfo.InvariantCulture);
+        });
     }
 
     private bool TryGetCourse(object sender, out CustomerOrder order, out CourseItem course)

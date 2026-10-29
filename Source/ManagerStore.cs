@@ -8,6 +8,8 @@ public sealed class ManagerStore
 {
     private const string DataFileName = "manager-data.json";
     private const string MissingName = "CHƯA CÓ HỌ TÊN";
+    private const string WebsiteMarkerFileName = ".acose-website-profile.json";
+    private const int MaximumImportProfiles = 4096;
     private static readonly StringComparer PathComparer = StringComparer.OrdinalIgnoreCase;
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -43,7 +45,20 @@ public sealed class ManagerStore
                 EnsureNoReparsePoints(DataDirectory);
                 bool hasMain = File.Exists(DataPath);
                 bool hasBackup = File.Exists(BackupPath);
-                if (!hasMain && !hasBackup) return new ManagerData();
+                if (!hasMain && !hasBackup)
+                {
+                    string examplePath = Path.Combine(DataDirectory, "manager-data.example.json");
+                    if (File.Exists(examplePath))
+                    {
+                        try
+                        {
+                            File.Copy(examplePath, DataPath);
+                            return ReadData(DataPath);
+                        }
+                        catch { }
+                    }
+                    return new ManagerData();
+                }
 
                 if (hasMain)
                 {
@@ -125,69 +140,110 @@ public sealed class ManagerStore
             int skipped = 0;
             int invalidLinks = 0;
             var knownProfiles = new Dictionary<string, CustomerOrder>(PathComparer);
+            var knownDevices = new Dictionary<string, CustomerOrder>(StringComparer.Ordinal);
             foreach (CustomerOrder order in data.Orders)
+            {
                 knownProfiles.TryAdd(CanonicalPath(order.ProfilePath), order);
+                if (order.WebsiteDeviceId is { } deviceId) knownDevices.TryAdd(deviceId, order);
+            }
+            var candidates = new List<(string Profile, AccountMetadata Metadata)>();
+            int inspected = 0;
 
-            foreach (string root in data.ImportRoots.Distinct(PathComparer))
+            foreach (string root in data.ImportRoots.Distinct(PathComparer).Take(32))
             {
                 string rootPath;
                 try
                 {
                     rootPath = CanonicalPath(root);
+                    if (rootPath.StartsWith(@"\\", StringComparison.Ordinal))
+                        throw new IOException("Không nhận profile qua đường dẫn mạng.");
                     EnsureNoReparsePoints(rootPath);
                     if (!Directory.Exists(rootPath)) continue;
                 }
                 catch (Exception ex) when (IsDataReadError(ex)) { skipped++; continue; }
 
-                foreach (string group in new[] { "_ManagedAccounts", "_CourseJobs" })
+                // Website login is handed off only after the host places a completed profile here.
+                // _CourseJobs contains worker scratch profiles and must never become customer orders.
+                string groupPath = Path.Combine(rootPath, "_ManagedAccounts");
+                string[] profiles;
+                try
                 {
-                    string groupPath = Path.Combine(rootPath, group);
-                    string[] profiles;
+                    EnsureWithin(rootPath, groupPath);
+                    EnsureNoReparsePoints(groupPath);
+                    if (!Directory.Exists(groupPath)) continue;
+                    // Only direct profile folders are eligible; browser cache and cookie stores are never read.
+                    int remaining = Math.Max(0, MaximumImportProfiles - inspected);
+                    profiles = Directory.EnumerateDirectories(groupPath, "*", SearchOption.TopDirectoryOnly)
+                        .Take(remaining + 1).ToArray();
+                    if (profiles.Length > remaining) { profiles = profiles.Take(remaining).ToArray(); skipped++; }
+                    inspected += profiles.Length;
+                }
+                catch (Exception ex) when (IsDataReadError(ex)) { skipped++; continue; }
+
+                foreach (string candidate in profiles.OrderBy(x => x, PathComparer))
+                {
                     try
                     {
-                        EnsureWithin(rootPath, groupPath);
-                        EnsureNoReparsePoints(groupPath);
-                        if (!Directory.Exists(groupPath)) continue;
-                        // Only direct profile folders are eligible; browser cache and cookie stores are never read.
-                        profiles = Directory.GetDirectories(groupPath, "*", SearchOption.TopDirectoryOnly);
+                        string profile = CanonicalPath(candidate);
+                        EnsureWithin(groupPath, profile);
+                        EnsureNoReparsePoints(profile);
+                        AccountMetadata? metadata = ReadAccountMetadata(profile);
+                        if (metadata is not null) candidates.Add((profile, metadata));
                     }
-                    catch (Exception ex) when (IsDataReadError(ex)) { skipped++; continue; }
+                    catch (Exception ex) when (IsDataReadError(ex)) { skipped++; }
+                }
+            }
 
-                    foreach (string candidate in profiles.OrderBy(x => x, PathComparer))
+            // Process the latest completed login first across every import root. Persisted completion
+            // times then prevent subsequent scans (or a missing newer directory) from selecting an old login.
+            foreach (var (profile, metadata) in candidates.OrderByDescending(x => x.Metadata.CompletedAtUtc)
+                         .ThenBy(x => x.Profile, PathComparer))
+            {
+                knownProfiles.TryGetValue(profile, out CustomerOrder? profileOrder);
+                CustomerOrder? order = null;
+                if (metadata.DeviceId is { } deviceId) knownDevices.TryGetValue(deviceId, out order);
+                if ((order is not null && profileOrder is not null && order != profileOrder) ||
+                    (profileOrder?.WebsiteDeviceId is { } existingId && metadata.DeviceId is { } incomingId && existingId != incomingId))
+                { skipped++; continue; }
+                order ??= profileOrder;
+                if (order is null)
+                {
+                    order = new CustomerOrder
                     {
-                        try
-                        {
-                            string profile = CanonicalPath(candidate);
-                            EnsureWithin(groupPath, profile);
-                            EnsureNoReparsePoints(profile);
-                            AccountMetadata metadata = ReadAccountMetadata(profile);
-                            List<string> urls = ReadCourseUrls(metadata.LaunchUrl, ref invalidLinks);
-                            if (!knownProfiles.TryGetValue(profile, out CustomerOrder? order))
-                            {
-                                order = new CustomerOrder
-                                {
-                                    Name = ImportedName(metadata),
-                                    ProfilePath = profile,
-                                    Source = "Đã có trên máy"
-                                };
-                                data.Orders.Add(order);
-                                knownProfiles.Add(profile, order);
-                                added++;
-                            }
-
-                            var observed = new HashSet<string>(order.ObservedExternalUrls, StringComparer.OrdinalIgnoreCase);
-                            var current = new HashSet<string>(order.Courses.Select(x => x.Url), StringComparer.OrdinalIgnoreCase);
-                            foreach (string url in urls)
-                            {
-                                if (!observed.Add(url)) continue;
-                                order.ObservedExternalUrls.Add(url);
-                                if (current.Add(url)) order.Courses.Add(new CourseItem { Url = url });
-                            }
-                            order.Refresh();
-                        }
-                        catch (Exception ex) when (IsDataReadError(ex)) { skipped++; }
+                        Name = ImportedName(metadata), ProfilePath = profile,
+                        Source = metadata.DeviceId is null ? "Đã có trên máy" : "Website"
+                    };
+                    data.Orders.Add(order);
+                    added++;
+                }
+                knownProfiles.TryAdd(profile, order);
+                if (metadata.DeviceId is { } stableId)
+                {
+                    order.WebsiteDeviceId ??= stableId;
+                    knownDevices.TryAdd(stableId, order);
+                    bool sameProfile = PathComparer.Equals(CanonicalPath(order.ProfilePath), profile);
+                    bool newer = order.WebsiteCompletedAtUtc is null || metadata.CompletedAtUtc > order.WebsiteCompletedAtUtc;
+                    bool busy = order.SessionBusy || data.Runs.Any(x => x.OrderId == order.Id) ||
+                        order.Courses.Any(x => x.IsRunning || x.State == CourseState.Queued);
+                    if (newer && (sameProfile || !busy))
+                    {
+                        order.ProfilePath = profile;
+                        order.WebsiteAttemptId = metadata.AttemptId;
+                        order.WebsiteCompletedAtUtc = metadata.CompletedAtUtc;
+                        order.CourseraUserId = metadata.CourseraUserId;
                     }
                 }
+
+                List<string> urls = ReadCourseUrls(metadata.CourseUrls, ref invalidLinks);
+                var observed = new HashSet<string>(order.ObservedExternalUrls, StringComparer.OrdinalIgnoreCase);
+                var current = new HashSet<string>(order.Courses.Select(x => x.Url), StringComparer.OrdinalIgnoreCase);
+                foreach (string url in urls)
+                {
+                    if (!observed.Add(url)) continue;
+                    order.ObservedExternalUrls.Add(url);
+                    if (current.Add(url)) order.Courses.Add(new CourseItem { Url = url });
+                }
+                order.Refresh();
             }
 
             var warnings = new List<string>();
@@ -250,6 +306,7 @@ public sealed class ManagerStore
         var orderIds = new HashSet<string>(StringComparer.Ordinal);
         var courseIds = new HashSet<string>(StringComparer.Ordinal);
         var profilePaths = new HashSet<string>(PathComparer);
+        var websiteDevices = new HashSet<string>(StringComparer.Ordinal);
         foreach (CustomerOrder order in data.Orders)
         {
             if (order is null || string.IsNullOrWhiteSpace(order.Id) || !orderIds.Add(order.Id) ||
@@ -258,6 +315,10 @@ public sealed class ManagerStore
                 throw new InvalidDataException("Thông tin đơn khách hàng không hợp lệ.");
             if (!Path.IsPathFullyQualified(order.ProfilePath) || !profilePaths.Add(CanonicalPath(order.ProfilePath)))
                 throw new InvalidDataException("Hồ sơ đăng nhập bị trùng hoặc có đường dẫn không hợp lệ.");
+            if (order.WebsiteDeviceId is not null && (!IsExternalId(order.WebsiteDeviceId) || !websiteDevices.Add(order.WebsiteDeviceId)) ||
+                order.WebsiteAttemptId is not null && !IsExternalId(order.WebsiteAttemptId) ||
+                order.CourseraUserId is not null && !IsExternalId(order.CourseraUserId))
+                throw new InvalidDataException("Mã hồ sơ website không hợp lệ hoặc bị trùng.");
             foreach (CourseItem course in order.Courses)
             {
                 if (course is null || string.IsNullOrWhiteSpace(course.Id) || !courseIds.Add(course.Id) ||
@@ -277,26 +338,64 @@ public sealed class ManagerStore
             throw new InvalidDataException("Thông tin phiên chạy không hợp lệ.");
     }
 
-    private sealed record AccountMetadata(string? DisplayName, string? FullName, string? LaunchUrl);
+    private sealed record AccountMetadata(string? DisplayName, string? FullName, IReadOnlyList<string> CourseUrls,
+        string? DeviceId = null, string? AttemptId = null, string? CourseraUserId = null, DateTimeOffset? CompletedAtUtc = null);
 
-    private static AccountMetadata ReadAccountMetadata(string profile)
+    private static AccountMetadata? ReadAccountMetadata(string profile)
     {
+        // A present but invalid marker is not a ready handoff. Do not fall back to identity left by
+        // an unfinished website attempt and accidentally import it as a completed legacy profile.
+        using (JsonDocument? website = ReadMetadata(Path.Combine(profile, WebsiteMarkerFileName)))
+        {
+            if (website is not null)
+            {
+                JsonElement root = website.RootElement;
+                if (!root.TryGetProperty("schemaVersion", out JsonElement version) || !version.TryGetInt32(out int schemaVersion) || schemaVersion != 1 ||
+                    OptionalString(root, "status") != "ready")
+                    throw new InvalidDataException("Hồ sơ website chưa sẵn sàng hoặc sai phiên bản.");
+                string? attemptId = OptionalString(root, "attemptId");
+                string? deviceId = OptionalString(root, "deviceId");
+                string? userId = OptionalString(root, "courseraUserId");
+                string? websiteName = OptionalString(root, "fullName");
+                if (!IsExternalId(attemptId) || !IsExternalId(deviceId) || userId is not null && !IsExternalId(userId) || !IsFullName(websiteName) ||
+                    !root.TryGetProperty("completedAtUtc", out JsonElement completed) || completed.ValueKind != JsonValueKind.String ||
+                    !completed.TryGetDateTimeOffset(out DateTimeOffset completedAtUtc) ||
+                    !root.TryGetProperty("courseUrls", out JsonElement links) || links.ValueKind != JsonValueKind.Array || links.GetArrayLength() > 256)
+                    throw new InvalidDataException("Thông tin bàn giao hồ sơ website không hợp lệ.");
+                var urls = new List<string>();
+                foreach (JsonElement link in links.EnumerateArray())
+                {
+                    if (link.ValueKind != JsonValueKind.String || link.GetString() is not { Length: <= 4096 } text)
+                        throw new InvalidDataException("Danh sách khóa học website không hợp lệ.");
+                    urls.Add(text);
+                }
+                return new AccountMetadata(null, websiteName, urls, deviceId, attemptId, userId, completedAtUtc.ToUniversalTime());
+            }
+        }
         string? displayName = null;
         string? fullName = null;
         string? launchUrl = null;
+        bool validLegacy = false;
         using (JsonDocument? manager = ReadMetadata(Path.Combine(profile, ".acose-account-manager.json")))
         {
             if (manager is not null)
             {
                 displayName = OptionalString(manager.RootElement, "displayName");
                 launchUrl = OptionalString(manager.RootElement, "launchUrl");
+                validLegacy = IsFullName(displayName) || IsValidLaunchUrl(launchUrl);
             }
         }
         using (JsonDocument? identity = ReadMetadata(Path.Combine(profile, ".acose-profile-identity.json")))
         {
-            if (identity is not null) fullName = OptionalString(identity.RootElement, "fullName");
+            if (identity is not null)
+            {
+                fullName = OptionalString(identity.RootElement, "fullName");
+                bool validVersion = !identity.RootElement.TryGetProperty("version", out JsonElement version) ||
+                    version.ValueKind == JsonValueKind.Number && version.TryGetInt32(out int value) && value == 1;
+                validLegacy |= validVersion && IsFullName(fullName);
+            }
         }
-        return new AccountMetadata(displayName, fullName, launchUrl);
+        return validLegacy ? new AccountMetadata(displayName, fullName, [launchUrl ?? ""]) : null;
     }
 
     private static JsonDocument? ReadMetadata(string path)
@@ -305,7 +404,7 @@ public sealed class ManagerStore
         if (!File.Exists(path)) return null;
         using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         if (stream.Length > 1024 * 1024) throw new InvalidDataException("Tệp thông tin hồ sơ vượt quá kích thước cho phép.");
-        JsonDocument document = JsonDocument.Parse(stream);
+        JsonDocument document = JsonDocument.Parse(stream, new JsonDocumentOptions { MaxDepth = 8 });
         if (document.RootElement.ValueKind != JsonValueKind.Object)
         {
             document.Dispose();
@@ -333,10 +432,26 @@ public sealed class ManagerStore
         return MissingName;
     }
 
-    private static List<string> ReadCourseUrls(string? launchUrl, ref int invalidLinks)
+    private static bool IsExternalId(string? value) => value is { Length: > 0 and <= 160 } &&
+        value.All(ch => char.IsAsciiLetterOrDigit(ch) || ch is '-' or '_' or '.' or ':');
+
+    private static bool IsFullName(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value)) return false;
+        try { InputRules.FullName(value); return true; }
+        catch (InvalidOperationException) { return false; }
+    }
+
+    private static bool IsValidLaunchUrl(string? value)
+    {
+        int invalid = 0;
+        return ReadCourseUrls([value ?? ""], ref invalid).Count > 0;
+    }
+
+    private static List<string> ReadCourseUrls(IEnumerable<string> values, ref int invalidLinks)
     {
         var urls = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        foreach (string line in (launchUrl ?? "").Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries))
+        foreach (string line in values.SelectMany(x => x.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries)))
         {
             if (string.IsNullOrWhiteSpace(line)) continue;
             try

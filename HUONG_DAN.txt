@@ -5,7 +5,7 @@ Nhấp đúp Acose.CustomerManager.exe trong thư mục này.
 Dùng tài khoản Windows hiện tại. Máy này đã có các thành phần .NET cần thiết.
 
 NHẬN KHÁCH TỪ WEB
-Khách vẫn đăng nhập qua https://acose-v-i-p.fly.dev/ như trước.
+Khách có thể đăng nhập qua cổng web (ví dụ: https://your-auth-portal.example.com/) hoặc tạo thủ công.
 Khi hệ thống cũ đã tạo phiên trên máy, trình quản lý nhận thêm hồ sơ từ
 D:\Acose\WorkerProfiles. Có thể bấm “Nhận đơn mới”; ứng dụng cũng kiểm tra mỗi 10 giây.
 Website và bộ nhận đăng nhập hiện tại vẫn cần hoạt động như trước.

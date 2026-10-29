@@ -23,7 +23,7 @@ Bộ auto chỉ tìm trong thư mục của đúng khóa tại các nơi sau:
 1. Thư mục đặt trong biến môi trường `ACOSE_PREPARED_PDF_ROOT`, nếu có.
 2. `D:\Acose\CustomerManager\PreparedPdfs`.
 3. `D:\Acose\CustomerManager\Engine\PreparedPdfs`.
-4. `C:\Users\dai99\Downloads\Acoursera PDFs` (thư mục Downloads của tài khoản Windows đang chạy).
+4. Thư mục `Downloads\Acoursera PDFs` trong thư mục người dùng Windows hiện tại (`%USERPROFILE%\Downloads\Acoursera PDFs`).
 
 Mỗi nơi đều phải có thư mục con theo khóa. PDF đang nằm trong `Downloads\Acoursera PDFs\<slug-khóa>` tiếp tục dùng được. Nếu không tìm thấy PDF, tên không khớp hoặc có nhiều file cùng khớp (kể cả ở nhiều nơi trên), khóa dừng và hiện lý do để bạn bổ sung/chọn lại file rồi chạy lại. Chỉ giữ một PDF khớp mỗi bài trong các thư mục kho. Nội dung PDF do bạn chuẩn bị sẵn.
 

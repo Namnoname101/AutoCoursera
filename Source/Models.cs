@@ -86,6 +86,12 @@ public sealed class CustomerOrder : ObservableObject
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
     public ObservableCollection<CourseItem> Courses { get; set; } = [];
     public List<string> ObservedExternalUrls { get; set; } = [];
+    // Optional website provenance keeps version-1 local data readable after an upgrade.
+    // Identity is a stable device ID; customer labels are never used for deduplication.
+    public string? WebsiteDeviceId { get; set; }
+    public string? WebsiteAttemptId { get; set; }
+    public DateTimeOffset? WebsiteCompletedAtUtc { get; set; }
+    public string? CourseraUserId { get; set; }
     [JsonIgnore] public string SessionNote { get => _sessionNote; set => Set(ref _sessionNote, value); }
     [JsonIgnore] public bool SessionBusy { get => _sessionBusy; set => Set(ref _sessionBusy, value); }
     [JsonIgnore] public int CompletedCount => Courses.Count(x => x.State == CourseState.Completed);
