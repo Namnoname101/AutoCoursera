@@ -25,25 +25,108 @@
 
 ---
 
-## ⚡ 2. Danh mục các dạng bài tập được xử lý (Supported Activity Types)
+## ⚡ 2. Quy trình Tự động hóa Khép kín từ A đến Z (100% End-to-End Automation)
 
-Hệ thống đã nghiên cứu và triển khai tự động hóa trực tiếp trên DOM của Coursera cho đầy đủ các dạng bài tập và hoạt động sau:
+Hệ thống được thiết kế để hoàn thành trọn vẹn một khóa học từ lúc bắt đầu cho đến khi đạt chứng chỉ 100% mà **không cần con người can thiệp thủ công**:
 
-| STT | Dạng hoạt động / Bài tập | Cơ chế xử lý chi tiết | Trạng thái |
+```mermaid
+flowchart LR
+    A["1. Tự động Ghi danh<br>(Auto-Enrollment)"] --> B["2. Video & Reading<br>(Mark Completed)"]
+    B --> C["3. Giải Quiz bằng AI<br>(AI Solver via API)"]
+    C --> D["4. Nộp Peer Assignment<br>(PDF Upload / Generation)"]
+    D --> E["5. Chấm bài Bạn học<br>(AI Peer Reviewer)"]
+    E --> F["6. Khảo sát & Đánh giá<br>(Feedback Survey)"]
+    F --> G["7. Chuyển tiếp Module<br>(100% Course Finished)"]
+```
+
+### Chi tiết các dạng bài tập & hoạt động được xử lý:
+
+| STT | Dạng hoạt động / Bài tập | Cơ chế xử lý chi tiết & Tự động hóa | Trạng thái |
 |:---:|:---|:---|:---:|
-| **1** | **Trắc nghiệm kiến thức (Quizzes & Graded Assessments)** | • Nhận diện câu hỏi trắc nghiệm đơn (Single-choice) & trắc nghiệm nhiều đáp án (Multiple-choice).<br>• Tự động mở bài quiz (`QuizOpeningAutomation`), chọn đáp án, nộp bài.<br>• Kiểm tra điểm số đạt yêu cầu (passing score).<br>• Cơ chế hoãn bài và chờ cooldown retry tự động (`DeferredQuizAutomation`). | ✅ Sẵn sàng |
-| **2** | **Bài tập tự luận lớn (Peer-graded Assignments)** | • **Chế độ Thư viện PDF (`PreparedPdfs`)**: Tự động tra cứu file PDF soạn sẵn theo slug khóa học và tên bài tập trong thư mục `PreparedPdfs/<course-slug>/`.<br>• Xử lý hộp thoại Upload File, input ẩn, upload file qua Chrome DevTools Protocol (CDP).<br>• Tự động điền tiêu đề bài nộp, kiểm tra tránh nộp trùng bài.<br>• **Chế độ Sinh nội dung theo Rubric (Rubric-based Document Generation)**: Đọc tiêu chí chấm điểm, render ra tài liệu PDF chuẩn A4/Unicode in-memory.<br>• Thuật toán kiểm tra trùng lặp câu chữ (overlap containment $\le 55\%$) và kiểm soát giới hạn số từ (word-count constraint). | ✅ Sẵn sàng |
-| **3** | **Chấm bài bạn học (Peer Review / Peer Grading)** | • Tự động nhận bài của học viên khác cần đánh giá (`review-next`, `give-feedback`).<br>• Chấm điểm từng tiêu chí rubric thành phần.<br>• Tự động tạo nhận xét/góp ý có ý nghĩa, đáp ứng độ dài ký tự tối thiểu.<br>• Cơ chế điền form theo tick DOM và xác nhận nộp review an toàn. | ✅ Sẵn sàng |
-| **4** | **Diễn đàn thảo luận (Discussion Forums)** | • Quét và nhận diện câu hỏi gợi ý trong diễn đàn môn học.<br>• Tự động tạo nội dung phản hồi thảo luận đạt tiêu chuẩn hoàn thành.<br>• Lưu nhật ký nộp bài (`DiscussionSubmissionJournal`) ngăn chặn phản hồi trùng lặp. | ✅ Sẵn sàng |
-| **5** | **Tài liệu đọc & Video bài giảng (Readings & Videos)** | • Tự động mở video bài giảng, lướt qua tài liệu đọc.<br>• Gửi tín hiệu hoàn tất mục học (Mark as completed) lên Coursera. | ✅ Sẵn sàng |
-| **6** | **Khảo sát & Đánh giá khóa học (Feedback & Surveys)** | • Tự động hoàn thành các biểu mẫu khảo sát chất lượng khóa học sau khi kết thúc module hoặc sau bài quiz.<br>• Xử lý an toàn DOM routes và phạm vi câu hỏi khảo sát. | ✅ Sẵn sàng |
-| **7** | **Hoạt động bổ trợ / Tùy chọn (Optional & Ungraded / LTI Items)** | • Nhận diện các hoạt động tùy chọn, plugin ngoài, bài thực hành không tính điểm (Ungraded App Items, Practice App Items, LTI tools).<br>• Bỏ qua an toàn hoặc hoàn thành nhanh để tránh kẹt luồng học. | ✅ Sẵn sàng |
-| **8** | **Tự động ghi danh (Course Enrollment)** | • Tự động phát hiện tài khoản chưa đăng ký môn học và thực hiện ghi danh tự động (Enrollment).<br>• Bỏ qua các pop-up quảng cáo gói trả phí / Coursera Plus hoặc liên kết tổ chức. | ✅ Sẵn sàng |
-| **9** | **Điều hướng module liên tục (Course Continuation)** | • Tự động theo dõi module hiện tại và chuyển tiếp sang module kế tiếp khi module trước đã hoàn tất. | ✅ Sẵn sàng |
+| **1** | **Trắc nghiệm kiến thức (Quizzes & Graded Assessments)** | • **Giải bài bằng AI qua API Key**: Tự động bóc tách đề bài, câu hỏi đơn/nhiều lựa chọn và gửi prompt tối ưu sang AI (GPT-4o, Claude 3.5, DeepSeek).<br>• AI trả lời chính xác đáp án cần chọn, engine tự tick vào radio/checkbox và bấm Submit.<br>• Kiểm tra điểm số đạt yêu cầu (passing score).<br>• **Cơ chế Hoãn bài (Deferred Quiz Queue)**: Nếu bài quiz bị Coursera giới hạn số lần làm trong ngày (cooldown 8h/24h), engine tự động đưa bài vào hàng đợi chờ và thử lại khi hết thời gian phạt. | ✅ 100% Auto |
+| **2** | **Bài tập tự luận lớn (Peer-graded Assignments)** | • **Chế độ Thư viện PDF (`PreparedPdfs`)**: Tự động tra cứu file PDF soạn sẵn theo slug khóa học và tên bài tập trong thư mục `PreparedPdfs/<course-slug>/`.<br>• Hook trực tiếp vào Chrome DevTools Protocol (CDP) để đẩy file vào input ẩn / Uppy uploader.<br>• **Chế độ Sinh nội dung theo Rubric**: AI đọc tiêu chí chấm điểm, render ra tài liệu PDF chuẩn A4/Unicode in-memory.<br>• Thuật toán kiểm tra trùng lặp câu chữ (overlap containment $\le 55\%$) và kiểm soát giới hạn số từ (word-count constraint). | ✅ 100% Auto |
+| **3** | **Chấm bài bạn học (Peer Review / Peer Grading)** | • Tự động nhận bài của học viên khác cần đánh giá (`review-next`, `give-feedback`).<br>• AI phân tích bài làm của bạn học theo từng tiêu chí rubric thành phần và chấm điểm hợp lý.<br>• Tự động tạo nhận xét/góp ý có ý nghĩa bằng tiếng Anh, đáp ứng độ dài ký tự tối thiểu của Coursera.<br>• Cơ chế điền form theo từng tick DOM và xác nhận nộp review an toàn. | ✅ 100% Auto |
+| **4** | **Diễn đàn thảo luận (Discussion Forums)** | • Quét và nhận diện câu hỏi gợi ý trong diễn đàn môn học.<br>• AI đóng vai học viên tự sinh bài luận thảo luận ngắn 3-4 câu tiếng Anh học thuật để post lên diễn đàn.<br>• Lưu nhật ký nộp bài (`DiscussionSubmissionJournal`) ngăn chặn phản hồi trùng lặp. | ✅ 100% Auto |
+| **5** | **Tài liệu đọc & Video bài giảng (Readings & Videos)** | • Tự động duyệt qua nội dung bài giảng video và tài liệu đọc bổ trợ.<br>• Tự động gửi tín hiệu hoàn tất mục học (Mark as completed) lên máy chủ Coursera. | ✅ 100% Auto |
+| **6** | **Khảo sát & Đánh giá khóa học (Feedback & Surveys)** | • Tự động hoàn thành các biểu mẫu khảo sát chất lượng sau khi kết thúc module hoặc sau bài quiz.<br>• Xử lý an toàn DOM routes và phạm vi câu hỏi khảo sát. | ✅ 100% Auto |
+| **7** | **Hoạt động bổ trợ / Tùy chọn (Optional & Ungraded / LTI Items)** | • Nhận diện các hoạt động tùy chọn, plugin ngoài, bài thực hành không tính điểm (Ungraded App Items, Practice App Items, LTI tools).<br>• Bỏ qua an toàn hoặc hoàn thành nhanh để tránh kẹt luồng học. | ✅ 100% Auto |
+| **8** | **Tự động ghi danh (Course Enrollment)** | • Tự động phát hiện tài khoản chưa đăng ký môn học và thực hiện ghi danh tự động (Enrollment).<br>• Bỏ qua các pop-up quảng cáo gói trả phí / Coursera Plus hoặc liên kết tổ chức. | ✅ 100% Auto |
+| **9** | **Điều hướng module liên tục (Course Continuation)** | • Tự động theo dõi tiến độ tuần học và chuyển tiếp sang module kế tiếp cho tới khi hoàn tất 100% toàn bộ khóa học. | ✅ 100% Auto |
 
 ---
 
-## 🛠️ 3. Kiến trúc hệ thống & Tính năng nâng cao
+## 🧠 3. Tích hợp AI Giải bài tập bằng API Key (AI-Powered Engine)
+
+Hệ thống tích hợp dịch vụ `AiCompletionService` linh hoạt, hỗ trợ kết nối với các mô hình ngôn ngữ lớn (LLM) thông qua API Key cá nhân của người dùng:
+
+```mermaid
+sequenceDiagram
+    participant Coursera as Coursera DOM
+    participant Engine as Automation Engine
+    participant AI as AI Model (GPT-4o / Claude / DeepSeek)
+
+    Engine->>Coursera: Trích xuất nội dung câu hỏi & danh sách đáp án [A, B, C, D]
+    Engine->>AI: Gửi Prompt có cấu trúc nghiêm ngặt (System Prompt + Question)
+    Note over AI: AI phân tích câu hỏi & chọn duy nhất 1 đáp án chính xác
+    AI-->>Engine: Trả về văn bản đáp án đúng
+    Engine->>Coursera: Tự động tick vào Radio/Checkbox tương ứng & Bấm Submit
+```
+
+### Các tác vụ AI đảm nhiệm:
+1. **Giải trắc nghiệm (Quiz Solver)**: Trích xuất câu hỏi và các lựa chọn, gửi prompt yêu cầu AI chọn duy nhất đáp án chính xác nhất mà không thêm lời giải thích thừa.
+2. **Viết bài thảo luận (Discussion Generator)**: Đóng vai học viên viết bài luận ngắn (3-4 câu tiếng Anh học thuật) liên quan trực tiếp đến chủ đề bài học.
+3. **Chấm bài bạn học (Peer Reviewer)**: Đọc rubric bài làm của bạn học, chấm điểm và viết lời nhận xét chi tiết đạt yêu cầu độ dài.
+4. **Sinh bài tập PDF (Peer Assignment Generator)**: Phân tích tiêu chí rubric của đề bài, tự sinh bài làm hoàn chỉnh và render ra file PDF chuẩn A4.
+
+---
+
+## 🖥️ 4. Các Kỹ thuật Chạy ngầm trong WPF không can thiệp màn hình (Background Automation Hacks)
+
+Một trong những ưu điểm kỹ thuật vượt trội nhất của công cụ là **khả năng chạy ngầm hoàn toàn mà không cướp chuột, cướp phím hay làm gián đoạn công việc của người dùng**:
+
+```mermaid
+flowchart TD
+    subgraph User Desktop
+        User["Người dùng làm việc / gõ văn bản / chơi game bình thường"]
+    end
+    
+    subgraph WPF Host & Engine Tricks
+        WPF["WPF Container Window"]
+        CDP["CDP: Ép độ phân giải Desktop 1920px cố định"]
+        JS["DOM Injection: Không di chuột ảo, không gõ phím ảo"]
+        Popup["Chặn triệt để Pop-up & OAuth vào Hidden Controller"]
+        Win32["Win32 API: Ẩn/Hiện tiến trình Worker tức thì"]
+    end
+
+    User -.->|Không bị tranh chấp màn hình| WPF
+    WPF --> CDP
+    WPF --> JS
+    WPF --> Popup
+    WPF --> Win32
+```
+
+### 1. Ép độ phân giải Desktop 1920px bằng Chrome DevTools Protocol (CDP)
+* **Vấn đề của Coursera**: Khi thu nhỏ cửa sổ trình duyệt (hoặc chạy trong cửa sổ kích thước nhỏ), CSS Media Queries của Coursera sẽ tự động kích hoạt giao diện Mobile, làm **ẩn thanh sidebar điều hướng và ẩn nút nộp bài**.
+* **Giải pháp**: Engine can thiệp sâu vào CDP bằng lệnh `Emulation.setDeviceMetricsOverride`, ép trình duyệt luôn hoạt động ở chế độ Desktop chuẩn (`width: 1920px`) và tự động co tỉ lệ (`scale`) vừa vặn vào khung WPF. Sidebar và nút bấm luôn hiển thị đầy đủ 100%.
+
+### 2. Không chiếm chuột và bàn phím (Zero Focus-Stealing)
+* Tất cả thao tác click nút, tick chọn đáp án trắc nghiệm, cuộn trang đều được thực thi trực tiếp qua **JavaScript DOM Injection (`ExecuteScriptAsync`)** và **CDP Protocol**.
+* Engine **hoàn toàn không sử dụng chuột ảo hệ điều hành** (như `SendKeys` hay `mouse_event`). Người dùng có thể thoải mái gõ văn bản, lướt web, làm việc hoặc chơi game trên cùng chiếc máy tính mà không sợ bị click nhầm.
+
+### 3. Điều khiển Ẩn / Hiện cửa sổ Worker linh hoạt qua Win32 API
+* Tích hợp bộ điều khiển HWND trong `WorkerWindow.cs`, sử dụng API `ShowWindowAsync` của Windows (`user32.dll`).
+* Người dùng có thể bấm nút **"Ẩn"** để ẩn hoàn toàn cửa sổ WebView2 của khóa học xuống chạy ngầm tiết kiệm tài nguyên, hoặc bấm **"Hiện"** để mở lại theo dõi thời gian thực.
+
+### 4. Chặn Pop-up và gắn luồng ngoài vào Hidden Controller
+* Lắng nghe sự kiện `CoreWebView2.NewWindowRequested` để chặn đứng các pop-up quảng cáo, đăng ký gói trả phí Coursera Plus hoặc liên kết bên ngoài.
+* Các liên kết LTI công cụ ngoài được điều hướng vào danh sách controller ẩn (`_hiddenLtiControllers`), không bao giờ bị văng cửa sổ ra giữa màn hình.
+
+### 5. In PDF hoàn toàn trong InPrivate Hidden WebView2
+* Khâu sinh bài tập PDF tự động sử dụng một WebView2 controller ẩn riêng biệt với chế độ InPrivate, in tài liệu trực tiếp in-memory ra file A4 chuẩn Unicode mà không điều hướng hay làm gián đoạn tab học tập chính.
+
+---
+
+## 🛠️ 5. Kiến trúc hệ thống
 
 ```mermaid
 flowchart TD
@@ -75,7 +158,7 @@ flowchart TD
 
 ---
 
-## 🚀 4. Hướng dẫn bắt đầu nhanh (Quick Start)
+## 🚀 6. Hướng dẫn bắt đầu nhanh (Quick Start)
 
 ### Yêu cầu môi trường
 * **Hệ điều hành**: Windows 10 / Windows 11 (64-bit)
@@ -105,9 +188,9 @@ flowchart TD
 
 ---
 
-## 📂 5. Hướng dẫn cấu hình dữ liệu & File mẫu
+## 📂 7. Hướng dẫn cấu hình dữ liệu & File mẫu
 
-### 5.1. Dữ liệu học viên (`Data/manager-data.json`)
+### 7.1. Dữ liệu học viên (`Data/manager-data.json`)
 File dữ liệu mẫu được cung cấp tại `Data/manager-data.json` (và bản tham khảo `Data/manager-data.example.json`). Cấu trúc:
 ```json
 {
@@ -133,7 +216,7 @@ File dữ liệu mẫu được cung cấp tại `Data/manager-data.json` (và b
 }
 ```
 
-### 5.2. Thư viện bài nộp PDF (`PreparedPdfs/`)
+### 7.2. Thư viện bài nộp PDF (`PreparedPdfs/`)
 Để tool tự động nộp bài tập Peer Assignment bằng PDF của bạn:
 1. Vào thư mục `PreparedPdfs/`.
 2. Tạo thư mục con có tên là **slug của khóa học** (phần sau `/learn/` trên URL Coursera).
@@ -145,7 +228,7 @@ File dữ liệu mẫu được cung cấp tại `Data/manager-data.json` (và b
          personal-development-plan-pdp.pdf
      ```
 
-### 5.3. Cấu hình AI mở rộng (Tùy chọn)
+### 7.3. Cấu hình AI mở rộng (Tùy chọn)
 Nếu bạn muốn sử dụng tính năng AI để tự động sinh bài tập PDF theo rubric hoặc viết nội dung thảo luận:
 * Tham khảo file cấu hình mẫu tại `Data/engine-settings.example.json`.
 * Thiết lập các biến môi trường trên máy của bạn (hoặc cấu hình qua UI):
@@ -160,7 +243,7 @@ Nếu bạn muốn sử dụng tính năng AI để tự động sinh bài tập
 
 ---
 
-## 📁 6. Cấu trúc thư mục dự án
+## 📁 8. Cấu trúc thư mục dự án
 
 ```text
 ├── Source/                             # Toàn bộ mã nguồn C# và giao diện WPF
@@ -182,14 +265,14 @@ Nếu bạn muốn sử dụng tính năng AI để tự động sinh bài tập
 
 ---
 
-## 🔒 7. Bảo mật & Miễn trừ trách nhiệm
+## 🔒 9. Bảo mật & Miễn trừ trách nhiệm
 
 * **Bảo vệ quyền riêng tư**: Không có thông tin người dùng, mật khẩu, cookies hay mã token bí mật nào được lưu trữ trong mã nguồn hoặc đẩy lên repository.
 * **Mục đích nghiên cứu & học tập**: Dự án được xây dựng nhằm mục đích nghiên cứu công nghệ tự động hóa trình duyệt (Browser Automation) và tối ưu hóa trải nghiệm quản lý học tập. Người sử dụng cần tuân thủ Điều khoản Dịch vụ của nền tảng Coursera khi áp dụng vào thực tế.
 
 ---
 
-## 🤝 8. Đóng góp & Phát triển mở rộng
+## 🤝 10. Đóng góp & Phát triển mở rộng
 
 Mọi đóng góp, báo lỗi hoặc đề xuất tính năng mới đều được hoan nghênh:
 1. Fork repository.
