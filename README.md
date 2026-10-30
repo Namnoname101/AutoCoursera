@@ -169,8 +169,8 @@ flowchart TD
 
 1. **Clone repository về máy**:
    ```bash
-   git clone https://github.com/Namnoname101/CustomerManager-Acore.git
-   cd CustomerManager-Acore
+   git clone https://github.com/Namnoname101/AutoCoursera.git
+   cd AutoCoursera
    ```
 
 2. **Khởi chạy ứng dụng**:
